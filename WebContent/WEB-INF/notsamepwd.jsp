@@ -13,8 +13,7 @@
 <body>
 	
 	비밀번호가 틀렸습니다.<br>
-	<a href= "/guestbook2/gtr?action=<%=where%>form&no=<%=no%>">다시입력하기</a>
-	
+	<a href= "/guestbook2/gtr?action=conpwd&no=<%=no%>&where=<%=where%>">다시입력하기</a>
 	<a href= "/guestbook2/gtr?action=list">리스트로가기</a>
 </body>
 </html>

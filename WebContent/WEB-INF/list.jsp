@@ -45,8 +45,8 @@
 			<td><%=vo.getGuestno()%> </td>
 			<td><%=vo.getName()%></td>
 			<td><%=vo.getDate()%></td>
-			<td><a href= "/guestbook2/gtr?no=<%=vo.getGuestno()%>&action=upform">수정</a></td>
-			<td><a href= "/guestbook2/gtr?no=<%=vo.getGuestno()%>&action=deform">삭제</a></td>
+			<td><a href= "/guestbook2/gtr?no=<%=vo.getGuestno()%>&action=conpwd&where=up">수정</a></td>
+			<td><a href= "/guestbook2/gtr?no=<%=vo.getGuestno()%>&action=conpwd&where=de">삭제</a></td>
 			
 		</tr>
 		<tr>
