@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.javaex.dao.GuestDao;
+import com.javaex.util.WepUtil;
 import com.javaex.vo.GuestVo;
 import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
 
@@ -31,8 +32,10 @@ public class GuestController extends HttpServlet {
 			request.setAttribute("glist", guestList);
 
 			// jsp포어드
-			RequestDispatcher rd = request.getRequestDispatcher("./WEB-INF/list.jsp");
-			rd.forward(request, response);
+			//RequestDispatcher rd = request.getRequestDispatcher("./WEB-INF/list.jsp");
+			//rd.forward(request, response);
+			
+			WepUtil.forword(request, response,"./WEB-INF/list.jsp");
 
 		} else if ("add".equals(action)) {//추가
 			System.out.println("add");
@@ -51,12 +54,14 @@ public class GuestController extends HttpServlet {
 
 			String where = request.getParameter("where");//de or up 이지만 처음 변경을 누룬지 삭제를 누른지 판단대주는 변수.
 			int no = Integer.parseInt(request.getParameter("no"));
-
+			System.out.println(where);
+			
 			request.setAttribute("where", where);
 			request.setAttribute("no", no);
 
-			RequestDispatcher rd = request.getRequestDispatcher("./WEB-INF/confirmpassword.jsp");
-			rd.forward(request, response);
+			//RequestDispatcher rd = request.getRequestDispatcher("./WEB-INF/confirmpassword.jsp");
+			//rd.forward(request, response);
+			WepUtil.forword(request, response,"./WEB-INF/confirmpassword.jsp");
 		} else if ("delandup".equals(action)) {
 			//비밀번호가 맞는지 확인해주고 틀리면 틀렸다는 창으로 맞으면 처음에 어떤 창을 선택했는지에 따라 각 행동을 한다.
 			
@@ -82,8 +87,9 @@ public class GuestController extends HttpServlet {
 			} else { //비밀번호가 틀렸을때 번호와 삭제를 눌렀는지 변경을 눌렀는지 확인해주는 변수를 들고 비밀번호틀림 창으로 이동한다.
 				request.setAttribute("no", no);
 				request.setAttribute("where", where);
-				RequestDispatcher rd = request.getRequestDispatcher("./WEB-INF/notsamepwd.jsp");
-				rd.forward(request, response);
+				//RequestDispatcher rd = request.getRequestDispatcher("./WEB-INF/updateform.jsp");
+				//rd.forward(request, response);
+				WepUtil.forword(request, response,"./WEB-INF/writeform.jsp");
 			}
 		} else if ("update".equals(action)) {
 
@@ -91,11 +97,10 @@ public class GuestController extends HttpServlet {
 			String name = request.getParameter("name");
 			String content = request.getParameter("content");
 			String date = request.getParameter("date");
-			String pwd1 = request.getParameter("pwd");
-
+	
 			GuestDao guestDao = new GuestDao();
 			
-			GuestVo updateVo = new GuestVo(no, name, pwd1, content, date);
+			GuestVo updateVo = new GuestVo(no, name, content, date);
 			guestDao.guestupdate(updateVo);
 
 			response.sendRedirect("/guestbook2/gtr?action=list");

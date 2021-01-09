@@ -18,6 +18,13 @@ public class GuestVo {
 		this.date = date;
 	}
 	
+	public GuestVo(int guestno, String name , String content, String date) {
+		this.guestno = guestno;
+		this.name = name;
+		this.content = content;
+		this.date = date;
+	}
+	
 	public GuestVo(String name, String password, String content) {
 		
 		this.name = name;

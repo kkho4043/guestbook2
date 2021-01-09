@@ -15,7 +15,7 @@
 	<form action = "/guestbook2/gtr" method="get"> 
 	이름 : <input type="text" name = "name"  value = "<%=updatelist.get(0).getName()%>"> <br>
 	내용 : <input type="text" name = "content" value = "<%=updatelist.get(0).getContent() %>"> <br>
-	비밀번호 : (확인됨)<input type="hidden" name = "pwd" value = "<%=updatelist.get(0).getPassword()%>"> <br>
+	비밀번호 : (확인됨) <br>
 	<input type="hidden" name = "no" value = "<%=updatelist.get(0).getGuestno()%>">
 	<input type="hidden" name = "date" value = "<%=updatelist.get(0).getDate()%>">
 	<input type="hidden" name = "action" value="update">
