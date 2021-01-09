@@ -93,9 +93,9 @@ public class GuestController extends HttpServlet {
 				request.setAttribute("no", no);
 				request.setAttribute("where", where);
 				
-				//RequestDispatcher rd = request.getRequestDispatcher("./WEB-INF/updateform.jsp");
+				//RequestDispatcher rd = request.getRequestDispatcher("./WEB-INF/notsamepwd.jsp");
 				//rd.forward(request, response);
-				WepUtil.forword(request, response,"./WEB-INF/writeform.jsp");
+				WepUtil.forword(request, response,"./WEB-INF/notsamepwd.jsp");
 			}
 		} else if ("update".equals(action)) {
 
