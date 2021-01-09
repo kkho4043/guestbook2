@@ -34,7 +34,6 @@ public class GuestController extends HttpServlet {
 			// jsp포어드
 			//RequestDispatcher rd = request.getRequestDispatcher("./WEB-INF/list.jsp");
 			//rd.forward(request, response);
-			
 			WepUtil.forword(request, response,"./WEB-INF/list.jsp");
 
 		} else if ("add".equals(action)) {//추가
@@ -47,9 +46,9 @@ public class GuestController extends HttpServlet {
 			GuestDao guestDao = new GuestDao();
 			GuestVo guestVo = new GuestVo(name, pwd, content);
 			guestDao.guestInsert(guestVo);
-
-			response.sendRedirect("/guestbook2/gtr?action=list");
-
+			
+			//response.sendRedirect("/guestbook2/gtr?action=list");
+			WepUtil.redirect(request, response, "/guestbook2/gtr?action=list");
 		} else if ("conpwd".equals(action)) {//비밀번호 확인창 앞에서 변경을 누르던 삭제를 누르던 이창으로 온다
 
 			String where = request.getParameter("where");//de or up 이지만 처음 변경을 누룬지 삭제를 누른지 판단대주는 변수.
@@ -77,16 +76,23 @@ public class GuestController extends HttpServlet {
 			if (pwd1.equals(pwd2)) { //비밀번호가 맞으면.
 				if ("de".equals(where)) {//de일때 delete수행 
 					guestDao.guestDelete(no);
-					response.sendRedirect("/guestbook2/gtr?action=list");
+					
+					//response.sendRedirect("/guestbook2/gtr?action=list");
+					WepUtil.redirect(request, response, "/guestbook2/gtr?action=list");
+					
 				} else if ("up".equals(where)) {//up일때 update폼으로 이동. 
 					request.setAttribute("guestVo", guestVo);
-					RequestDispatcher rd = request.getRequestDispatcher("./WEB-INF/updateform.jsp");
-					rd.forward(request, response);
+					
+					//RequestDispatcher rd = request.getRequestDispatcher("./WEB-INF/updateform.jsp");
+					//rd.forward(request, response);
+					
+					WepUtil.forword(request, response,"./WEB-INF/updateform.jsp");
 				}
 
 			} else { //비밀번호가 틀렸을때 번호와 삭제를 눌렀는지 변경을 눌렀는지 확인해주는 변수를 들고 비밀번호틀림 창으로 이동한다.
 				request.setAttribute("no", no);
 				request.setAttribute("where", where);
+				
 				//RequestDispatcher rd = request.getRequestDispatcher("./WEB-INF/updateform.jsp");
 				//rd.forward(request, response);
 				WepUtil.forword(request, response,"./WEB-INF/writeform.jsp");
@@ -103,7 +109,8 @@ public class GuestController extends HttpServlet {
 			GuestVo updateVo = new GuestVo(no, name, content, date);
 			guestDao.guestupdate(updateVo);
 
-			response.sendRedirect("/guestbook2/gtr?action=list");
+			//response.sendRedirect("/guestbook2/gtr?action=list");
+			WepUtil.redirect(request, response, "/guestbook2/gtr?action=list");
 		}
 	}
 
